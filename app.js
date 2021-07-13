@@ -2,9 +2,17 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
 const productRoutes = require("./api/routes/products");
 const ordersRoutes = require("./api/routes/orders");
+
+mongoose.connect(
+  "mongodb+srv://benoitleehavet:" +
+    process.env.MONGO_ATLAS_PW +
+    "@api-rest-shop.pcmoz.mongodb.net/api-rest-shop?retryWrites=true&w=majority",
+  { useNewUrlParser: true, useUnifiedTopology: true }
+);
 
 //get log of what request has been done
 app.use(morgan("dev"));
