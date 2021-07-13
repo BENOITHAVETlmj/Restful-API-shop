@@ -6,7 +6,12 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", (req, res, next) => {
-  res.status(201).json({ messages: "Handling POST resquest to /products" });
+  // we define that we need a body on a POST request as a json object like this
+  const product = { name: req.body.name, price: req.body.price };
+  res.status(201).json({
+    messages: "Handling POST resquest to /products",
+    createdProduct: product,
+  });
 });
 
 router.get("/:productId", (req, res, next) => {
