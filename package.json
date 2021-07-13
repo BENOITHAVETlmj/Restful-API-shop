@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/BENOITHAVETlmj/Restful-API-shop/issues"
   },
-  "homepage": "https://github.com/BENOITHAVETlmj/Restful-API-shop#readme"
+  "homepage": "https://github.com/BENOITHAVETlmj/Restful-API-shop#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
 }
