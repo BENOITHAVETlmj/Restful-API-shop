@@ -17,6 +17,8 @@ mongoose.Promise = global.Promise;
 
 //get log of what request has been done
 app.use(morgan("dev"));
+// make uploads allowable publically
+app.use("/uploads", express.static("uploads"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
