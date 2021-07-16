@@ -13,6 +13,7 @@ mongoose.connect(
     "@api-rest-shop.pcmoz.mongodb.net/api-rest-shop?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
+mongoose.Promise = global.Promise;
 
 //get log of what request has been done
 app.use(morgan("dev"));
