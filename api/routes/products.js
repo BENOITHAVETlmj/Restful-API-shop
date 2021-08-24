@@ -48,7 +48,7 @@ router.get("/", (req, res, next) => {
               productImage: doc.productImage,
               request: {
                 type: "GET",
-                url: "http://localhost:3000/products/" + doc._id,
+                url: "https://shopserverapp.herokuapp.com/products/" + doc._id,
               },
             };
           }),
@@ -87,7 +87,7 @@ router.post("/", upload.single("productImage"), (req, res, next) => {
           _id: result._id,
           request: {
             type: "GET",
-            url: "http://localhost:3000/products/" + result._id,
+            url: "https://shopserverapp.herokuapp.com/products/" + result._id,
           },
         },
       });
@@ -114,7 +114,7 @@ router.get("/:productId", (req, res, next) => {
           request: {
             type: "GET",
             description: "get all products",
-            url: "http://localhost:3000/products/",
+            url: "https://shopserverapp.herokuapp.com/products/",
           },
         };
         res.status(200).json(response);
@@ -142,7 +142,7 @@ router.patch("/:productId", (req, res, next) => {
         message: "Product updated successfully",
         request: {
           type: "GET",
-          url: "http://localhost:3000/products/" + id,
+          url: "https://shopserverapp.herokuapp.com/products/" + id,
         },
       });
     })
@@ -161,7 +161,7 @@ router.delete("/:productId", (req, res, next) => {
         message: "Deleted successfully",
         request: {
           type: "POST",
-          url: "http://localhost:3000/products/",
+          url: "https://shopserverapp.herokuapp.com/products/",
           body: { name: "String", price: "Number" },
         },
       })
