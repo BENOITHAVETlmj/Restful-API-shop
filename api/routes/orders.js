@@ -19,7 +19,7 @@ router.get("/", (req, res, next) => {
             quantity: doc.quantity,
             request: {
               type: "GET",
-              url: "https://shopserverapp.herokuapp.com/orders/" + doc._id,
+              url: "http://localhost:3000/orders/" + doc._id,
             },
           };
         }),
@@ -56,7 +56,7 @@ router.post("/", (req, res, next) => {
             product: result.product,
             quantity: result.quantity,
           },
-          url: "https://shopserverapp.herokuapp.com/orders/" + result._id,
+          url: "http://localhost:3000/orders/" + result._id,
         },
       });
     })
@@ -75,10 +75,7 @@ router.get("/:orderId", (req, res, next) => {
       }
       res.status(200).json({
         order: order,
-        request: {
-          type: "GET",
-          url: "https://shopserverapp.herokuapp.com/orders",
-        },
+        request: { type: "GET", url: "http://localhost:3000/orders" },
       });
     })
     .catch((err) => {
@@ -94,7 +91,7 @@ router.delete("/:orderId", (req, res, next) => {
         message: "Order deleted",
         request: {
           type: "POST",
-          url: "https://shopserverapp.herokuapp.com/orders",
+          url: "http://localhost:3000/orders",
           body: { productId: "String", quantity: "Number" },
         },
       })
