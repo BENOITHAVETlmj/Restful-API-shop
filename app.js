@@ -3,12 +3,14 @@ const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 const productRoutes = require("./api/routes/products");
 const ordersRoutes = require("./api/routes/orders");
-
 mongoose.connect(
-  "mongodb+srv://benoithavet:toto@store-api.pcmoz.mongodb.net/store-api?retryWrites=true&w=majority",
+  "mongodb+srv://benoithavet:" +
+    process.env.MONGO_PWD +
+    "@store-api.pcmoz.mongodb.net/store-api?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 mongoose.Promise = global.Promise;

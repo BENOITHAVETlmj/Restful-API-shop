@@ -4,4 +4,4 @@ const app = require("./app");
 
 const server = http.createServer(app);
 
-server.listen(PORT, () => console.log("server started"));
+server.listen(PORT, () => console.log(`server started on ${PORT}`));
