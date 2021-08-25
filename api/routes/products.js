@@ -3,6 +3,8 @@ const router = express.Router();
 const Product = require("../../models/product");
 const mongoose = require("mongoose");
 const multer = require("multer");
+require("dotenv").config();
+const PROD = "https://shopserverapp.herokuapp.com/";
 
 // this function will be run everytime a newfile is created
 const storage = multer.diskStorage({
@@ -48,7 +50,10 @@ router.get("/", (req, res, next) => {
               productImage: doc.productImage,
               request: {
                 type: "GET",
-                url: "http://localhost:3000/products/" + doc._id,
+                url:
+                  (process.env.SERVER_APP === PROD
+                    ? PROD + "products/"
+                    : "http://localhost:3000/products/") + doc._id,
               },
             };
           }),
@@ -66,6 +71,7 @@ router.get("/", (req, res, next) => {
 
 // single() middleware here will parse my data image file
 router.post("/", upload.single("productImage"), (req, res, next) => {
+  console.log(process.env.SERVER_APP);
   console.log(req.file);
   const product = new Product({
     _id: new mongoose.Types.ObjectId(),
@@ -87,7 +93,10 @@ router.post("/", upload.single("productImage"), (req, res, next) => {
           _id: result._id,
           request: {
             type: "GET",
-            url: "http://localhost:3000/products/" + result._id,
+            url:
+              (process.env.SERVER_APP === PROD
+                ? PROD + "/products/"
+                : "http://localhost:3000/products/") + result._id,
           },
         },
       });
@@ -114,7 +123,10 @@ router.get("/:productId", (req, res, next) => {
           request: {
             type: "GET",
             description: "get all products",
-            url: "http://localhost:3000/products/",
+            url:
+              process.env.SERVER_APP === PROD
+                ? PROD + "/products/"
+                : "http://localhost:3000/products/",
           },
         };
         res.status(200).json(response);
@@ -142,7 +154,10 @@ router.patch("/:productId", (req, res, next) => {
         message: "Product updated successfully",
         request: {
           type: "GET",
-          url: "http://localhost:3000/products/" + id,
+          url:
+            (process.env.SERVER_APP === PROD
+              ? PROD + "/products/"
+              : "http://localhost:3000/products/") + id,
         },
       });
     })
@@ -161,7 +176,10 @@ router.delete("/:productId", (req, res, next) => {
         message: "Deleted successfully",
         request: {
           type: "POST",
-          url: "http://localhost:3000/products/",
+          url:
+            process.env.SERVER_APP === PROD
+              ? PROD + "/products/"
+              : "http://localhost:3000/products/",
           body: { name: "String", price: "Number" },
         },
       })

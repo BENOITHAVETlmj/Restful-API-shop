@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const Order = require("../../models/order");
 const Product = require("../../models/product");
+const PROD = "https://shopserverapp.herokuapp.com/";
 
 router.get("/", (req, res, next) => {
   Order.find()
@@ -19,7 +20,10 @@ router.get("/", (req, res, next) => {
             quantity: doc.quantity,
             request: {
               type: "GET",
-              url: "http://localhost:3000/orders/" + doc._id,
+              url:
+                (process.env.PORT === PROD
+                  ? PROD + "/orders/"
+                  : "http://localhost:3000/orders/") + doc._id,
             },
           };
         }),
@@ -56,7 +60,10 @@ router.post("/", (req, res, next) => {
             product: result.product,
             quantity: result.quantity,
           },
-          url: "http://localhost:3000/orders/" + result._id,
+          url:
+            (process.env.PORT === PROD
+              ? PROD + "/orders/"
+              : "http://localhost:3000/orders/") + result._id,
         },
       });
     })
@@ -75,7 +82,13 @@ router.get("/:orderId", (req, res, next) => {
       }
       res.status(200).json({
         order: order,
-        request: { type: "GET", url: "http://localhost:3000/orders" },
+        request: {
+          type: "GET",
+          url:
+            process.env.PORT === PROD
+              ? PROD + "/orders/"
+              : "http://localhost:3000/orders/",
+        },
       });
     })
     .catch((err) => {
@@ -91,7 +104,10 @@ router.delete("/:orderId", (req, res, next) => {
         message: "Order deleted",
         request: {
           type: "POST",
-          url: "http://localhost:3000/orders",
+          url:
+            process.env.PORT === PROD
+              ? PROD + "/orders/"
+              : "http://localhost:3000/orders/",
           body: { productId: "String", quantity: "Number" },
         },
       })
