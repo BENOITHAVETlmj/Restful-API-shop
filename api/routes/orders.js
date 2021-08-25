@@ -21,7 +21,7 @@ router.get("/", (req, res, next) => {
             request: {
               type: "GET",
               url:
-                (process.env.PORT === PROD
+                (process.env.NODE_ENV === "production"
                   ? PROD + "/orders/"
                   : "http://localhost:3000/orders/") + doc._id,
             },
@@ -61,7 +61,7 @@ router.post("/", (req, res, next) => {
             quantity: result.quantity,
           },
           url:
-            (process.env.PORT === PROD
+            (process.env.NODE_ENV === "production"
               ? PROD + "/orders/"
               : "http://localhost:3000/orders/") + result._id,
         },
@@ -85,7 +85,7 @@ router.get("/:orderId", (req, res, next) => {
         request: {
           type: "GET",
           url:
-            process.env.PORT === PROD
+            process.env.NODE_ENV === "production"
               ? PROD + "/orders/"
               : "http://localhost:3000/orders/",
         },
@@ -105,7 +105,7 @@ router.delete("/:orderId", (req, res, next) => {
         request: {
           type: "POST",
           url:
-            process.env.PORT === PROD
+            process.env.NODE_ENV === "production"
               ? PROD + "/orders/"
               : "http://localhost:3000/orders/",
           body: { productId: "String", quantity: "Number" },
