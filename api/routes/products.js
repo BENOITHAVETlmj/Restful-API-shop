@@ -71,8 +71,6 @@ router.get("/", (req, res, next) => {
 
 // single() middleware here will parse my data image file
 router.post("/", upload.single("productImage"), (req, res, next) => {
-  console.log(process.env.SERVER_APP);
-  console.log(req.file);
   const product = new Product({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
