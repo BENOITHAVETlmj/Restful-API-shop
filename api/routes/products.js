@@ -3,7 +3,7 @@ const router = express.Router();
 const Product = require("../../models/product");
 const mongoose = require("mongoose");
 const multer = require("multer");
-require("dotenv").config();
+// require("dotenv").config();
 const PROD = "https://shopserverapp.herokuapp.com/";
 
 // this function will be run everytime a newfile is created
