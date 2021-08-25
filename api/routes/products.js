@@ -3,7 +3,7 @@ const router = express.Router();
 const Product = require("../../models/product");
 const mongoose = require("mongoose");
 const multer = require("multer");
-// require("dotenv").config();
+require("dotenv").config();
 const PROD = "https://shopserverapp.herokuapp.com/";
 
 // this function will be run everytime a newfile is created
@@ -51,7 +51,7 @@ router.get("/", (req, res, next) => {
               request: {
                 type: "GET",
                 url:
-                  (process.env.SERVER_APP === PROD
+                  (process.env.PORT === PROD
                     ? PROD + "products/"
                     : "http://localhost:3000/products/") + doc._id,
               },
@@ -92,7 +92,7 @@ router.post("/", upload.single("productImage"), (req, res, next) => {
           request: {
             type: "GET",
             url:
-              (process.env.SERVER_APP === PROD
+              (process.env.PORT === PROD
                 ? PROD + "/products/"
                 : "http://localhost:3000/products/") + result._id,
           },
@@ -122,7 +122,7 @@ router.get("/:productId", (req, res, next) => {
             type: "GET",
             description: "get all products",
             url:
-              process.env.SERVER_APP === PROD
+              process.env.PORT === PROD
                 ? PROD + "/products/"
                 : "http://localhost:3000/products/",
           },
@@ -153,7 +153,7 @@ router.patch("/:productId", (req, res, next) => {
         request: {
           type: "GET",
           url:
-            (process.env.SERVER_APP === PROD
+            (process.env.PORT === PROD
               ? PROD + "/products/"
               : "http://localhost:3000/products/") + id,
         },
@@ -175,7 +175,7 @@ router.delete("/:productId", (req, res, next) => {
         request: {
           type: "POST",
           url:
-            process.env.SERVER_APP === PROD
+            process.env.PORT === PROD
               ? PROD + "/products/"
               : "http://localhost:3000/products/",
           body: { name: "String", price: "Number" },
